@@ -75,5 +75,5 @@ def preprocess(
 def save_data(df: pd.DataFrame, path: Path):
     path.mkdir(parents=True, exist_ok=True)
 
-    output_path = path / 'proccessed.csv'
+    output_path = path / 'processed.csv'
     df.to_csv(output_path, index=False)
