@@ -71,6 +71,17 @@ def preprocess(
 
     return df
 
+def split_features_target(df: pd.DataFrame, target_column: str) -> tuple[pd.DataFrame, pd.Series]:
+    if target_column not in df.columns:
+        raise ValueError(
+            f"Target column: '{target_column}' does not exist in Dataframe"
+        )
+
+    X = df.drop(target_column, axis=1)
+    y = df[target_column]
+
+    return X, y
+        
 
 def save_data(df: pd.DataFrame, path: Path):
     path.mkdir(parents=True, exist_ok=True)
