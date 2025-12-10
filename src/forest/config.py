@@ -1,9 +1,8 @@
 from pathlib import Path
 
-data_dir = Path('data')
+data_dir = Path('../data')
 
-raw_dir = data_dir / 'raw' 
-raw_path = raw_dir / 'raw_data.csv'
+raw_dir = data_dir / 'raw' raw_path = raw_dir / 'raw_data.csv'
 
 processed_dir = data_dir / 'processed'
 processed_path = processed_dir / 'processed.csv'
