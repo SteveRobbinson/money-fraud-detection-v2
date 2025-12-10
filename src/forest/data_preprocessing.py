@@ -1,5 +1,6 @@
 from pathlib import Path
 import pandas as pd
+from sklearn.preprocessing import StandardScaler
 
 def load_raw_data(path: Path) -> pd.DataFrame:
     return pd.read_csv(path)
@@ -56,6 +57,22 @@ def drop_columns(df: pd.DataFrame, column_names: list[str]) -> pd.DataFrame:
     return df.drop(column_names, axis=1, errors='ignore')
 
 
+def standardize_features(df: pd.DataFrame) -> pd.DataFrame:
+    
+    numeric_features = df.select_dtypes(exclude='bool')
+    mapa = numeric_features.isin([0, 1]).all(axis=0).values
+    columns = numeric_features.columns.to_numpy()
+    columns_to_standardize = columns[~mapa]
+
+    scaler = StandardScaler()
+
+    df = df.astype({col: "float64" for col in columns_to_standardize}, copy=False)
+    df.loc[:, columns_to_standardize] = scaler.fit_transform(df.loc[:, columns_to_standardize])
+
+
+    return df
+
+
 def preprocess(
     path: Path,
     features: list[str],
@@ -68,7 +85,8 @@ def preprocess(
     df = create_features(df, features)
     df = get_dummies(df, dummies)
     df = drop_columns(df, column_names)
-
+    df = standardize_features(df)
+    
     return df
 
 def split_features_target(df: pd.DataFrame, target_column: str) -> tuple[pd.DataFrame, pd.Series]:
