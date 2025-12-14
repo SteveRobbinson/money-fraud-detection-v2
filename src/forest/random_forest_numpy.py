@@ -40,7 +40,7 @@ def buildtree(X: pd.DataFrame,
     if max_depth is not None and depth >= max_depth:
         return Node(value = np.bincount(y).argmax())
     
-    if len(X) <= 5000:
+    if len(X) <= min_samples_split:
         return Node(value = np.bincount(y).argmax())
 
     else:
