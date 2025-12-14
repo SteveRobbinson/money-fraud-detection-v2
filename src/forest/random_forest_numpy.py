@@ -161,7 +161,7 @@ class RandomForest:
                       ) -> pd.DataFrame | np.ndarray:
         
         indices = np.random.choice(np.arange(len(X)), size = self.batch_size)
-        X_set, y_set = X.iloc[indices], y.iloc[indices]
+        X_set, y_set = X.iloc[indices], y[indices]
 
         return X_set, y_set
         
