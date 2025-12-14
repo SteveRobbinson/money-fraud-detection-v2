@@ -34,7 +34,14 @@ dummies = ['transaction_type',
            'payment_channel'
            ]
 
-
+parametry_rf = {
+        'n_estimators': 500,
+        'batch_size': 70000,
+        'max_depth': 13,
+        'max_features': 10,
+        'min_samples_split': 15000,
+        'min_samples_leaf': 70
+}
 
 
 
