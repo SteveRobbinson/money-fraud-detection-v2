@@ -29,7 +29,7 @@ def gini_impurity(y: list[int] | np.ndarray) -> float:
 
 
 
-def buildtree(X: pd.DataFrame, 
+def buildtree(X: np.ndarray, 
               y: np.ndarray,
               depth: int | None, 
               max_depth: int | None,
@@ -75,7 +75,7 @@ class DecisionTree:
         self.root = None
 
     
-    def fit(self, X: pd.DataFrame, y: np.ndarray):
+    def fit(self, X: np.ndarray, y: np.ndarray):
         self.root = buildtree(X,
                               y,
                               depth = 0,
@@ -85,13 +85,13 @@ class DecisionTree:
                              )
 
     
-    def predict(self, X: pd.DataFrame) -> np.ndarray:
+    def predict(self, X: np.ndarray) -> np.ndarray:
         return np.array([predict_one(x, self.root) for x in X])
 
 
 
 
-def best_split_RF(X: pd.DataFrame,
+def best_split_RF(X: np.ndarray,
                   y: np.ndarray,
                   min_samples_split: int | None
                  ) -> Node | tuple[int, float, np.ndarray, np.ndarray]:
@@ -156,17 +156,17 @@ class RandomForest:
 
     
     def random_samples(self,
-                       X: pd.DataFrame,
+                       X: np.ndarray,
                        y: np.ndarray
                       ) -> pd.DataFrame | np.ndarray:
         
         indices = np.random.choice(np.arange(len(X)), size = self.batch_size)
-        X_set, y_set = X.iloc[indices], y[indices]
+        X_set, y_set = X[indices], y[indices]
 
         return X_set, y_set
         
 
-    def fit(self, X: pd.DataFrame, y: np.ndarray):
+    def fit(self, X: np.ndarray, y: np.ndarray):
         for t in range(self.n_estimators):
             X_set, y_set = self.random_samples(X, y)
             tree = DecisionTree(self.max_depth, self.min_samples_split, self.min_samples_leaf)
@@ -174,7 +174,7 @@ class RandomForest:
             self.trees.append(tree)
 
     
-    def one_tree_predict(self, x: pd.Series, tree: DecisionTree) -> int:
+    def one_tree_predict(self, x: np.ndarray, tree: DecisionTree) -> int:
                     
         # Jeżeli węzeł jest liściem zwracamy value          
         if tree.value is not None:
@@ -187,7 +187,7 @@ class RandomForest:
             return self.one_tree_predict(x, tree.right)
 
         
-    def predict_one(self, x: pd.Series) -> int:
+    def predict_one(self, x: np.ndarray) -> int:
         lista_glosow = []
     
         for tree in self.trees:
@@ -196,6 +196,6 @@ class RandomForest:
         return np.bincount(lista_glosow).argmax()
 
     
-    def predict(self, X: pd.DataFrame) -> list[int]:
+    def predict(self, X: np.ndarray) -> list[int]:
         return [self.predict_one(x) for x in range(len(X))]
         

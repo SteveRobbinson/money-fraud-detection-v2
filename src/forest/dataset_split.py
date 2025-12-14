@@ -13,6 +13,6 @@ def create_sets(X: pd.DataFrame,
     X_train, X_test = X.iloc[train_indices], X.iloc[test_indices]
     y_train, y_test = y.iloc[train_indices], y.iloc[test_indices]
 
-    return X_train, X_test, y_train.to_numpy(), y_test.to_numpy()
+    return X_train.to_numpy(), X_test.to_numpy(), y_train.to_numpy(), y_test.to_numpy()
 
 
