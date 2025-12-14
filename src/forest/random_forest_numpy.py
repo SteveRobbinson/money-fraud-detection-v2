@@ -45,7 +45,7 @@ def buildtree(X: pd.DataFrame,
 
     else:
         
-        best_feature, best_threshold, left_idx, right_idx = best_split_RF(X, y)
+        best_feature, best_threshold, left_idx, right_idx = best_split_RF(X, y, min_samples_split)
         node = Node(feature_index = best_feature, threshold = best_threshold)
         
         if best_feature is None:
