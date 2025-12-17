@@ -14,6 +14,8 @@ processed_path = processed_dir / 'processed.csv'
 models_dir = data_dir / 'models'
 model_path = models_dir / 'models.joblib'
 
+num_samples = 1000000
+num_samples_test = 100
 
 get_features = ['sender_account',
                 'receiver_account',
