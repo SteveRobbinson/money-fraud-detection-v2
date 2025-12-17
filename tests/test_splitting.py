@@ -9,7 +9,7 @@ def test_splitting(preprocessed_df):
     unique_vals = np.unique(y)
     assert np.isin(unique_vals, [0, 1, True, False]).all()
 
-    assert len(preprocessed_df.drop('is_fraud').columns) == len(X.columns)
+    assert len(preprocessed_df.drop('is_fraud', axis=1).columns) == len(X.columns)
 
     assert y.reset_index(drop=True).equals(preprocessed_df["is_fraud"].reset_index(drop=True))
         
