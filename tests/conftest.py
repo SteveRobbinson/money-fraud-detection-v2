@@ -22,13 +22,14 @@ def downsampled_df(preprocessed_df):
     return df_downsampled
 
 @pytest.fixture
-def X_y(df_downsampled):
-    X, y = split_features_target(df_downsampled, 'is_fraud')
+def X_y(downsampled_df):
+    X, y = split_features_target(downsampled_df, 'is_fraud')
 
     return X, y
 
 @pytest.fixture
-def sets(X, y):
+def sets(X_y):
+    X, y = X_y
     X_train, X_test, y_train, y_test = create_sets(X, y, 0.1)
 
     return X_train, X_test, y_train, y_test
