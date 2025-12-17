@@ -1,0 +1,29 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+      
+
+      - name: Set python version
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.3"
+          
+
+      - name: Install dependencies
+        run: python3 -m pip install -r requirements.txt
+
+
+      - name: Run tests
+        run: python -m pytest
