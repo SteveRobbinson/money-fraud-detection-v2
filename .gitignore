@@ -2,5 +2,7 @@ venv/
 __pycache__/
 .ipynb_checkpoints/
 data/
+!data/test/
+!data/test/1k_sample.csv
 *.egg-info/
 notebooks/
