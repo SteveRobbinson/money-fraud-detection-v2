@@ -24,11 +24,9 @@ get_features = ['sender_account',
                 ]
 
 
-drop_list = [*get_features,
-             'transaction_id',
+drop_list = ['transaction_id',
              'fraud_type',
-             'time_since_last_transaction',
-             'timestamp'
+             'time_since_last_transaction'
              ]
 
 
@@ -39,13 +37,17 @@ dummies = ['transaction_type',
            'payment_channel'
            ]
 
-parametry_rf = {
-        'n_estimators': 500,
-        'batch_size': 70000,
-        'max_depth': 13,
-        'max_features': 10,
-        'min_samples_split': 15000,
-        'min_samples_leaf': 70
+params_lightgbm = {
+    'objective': 'binary',
+    'boosting_type': 'gbdt' ,
+    'learning_rate': 0.02,
+    'num_leaves': 48,
+    'max_depth': 8,
+    'min_data_in_leaf': 1000,
+    'scale_pos_weight': 25,
+    'feature_fraction': 0.7,
+    'seed': 42,
+    'verbosity': -1
 }
 
 parametry_rf_test = {
