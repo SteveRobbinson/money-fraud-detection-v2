@@ -6,3 +6,4 @@ data/
 !data/test/1k_sample.csv
 *.egg-info/
 notebooks/
+.env
