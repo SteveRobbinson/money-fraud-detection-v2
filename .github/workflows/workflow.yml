@@ -9,6 +9,11 @@ on:
 jobs:
   CI:
     runs-on: ubuntu-latest
+    
+    env:
+      SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_USER }}
+      SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      SNOWFLAKE_ACCOUNT: ${{ vars.SNOWFLAKE_ACCOUNT }}
 
     steps:
       - name: Checkout repo
