@@ -9,4 +9,4 @@ from
 where
   day_of_week in (6, 7)
   and
-  is_weekend = 0;
+  is_weekend = 0
