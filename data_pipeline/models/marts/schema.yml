@@ -56,4 +56,12 @@ models:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: 'in (0, 1)'
-        
+
+  - name: fct_location_frequency
+    columns:
+      - name: location_frequency
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: '>=0'
