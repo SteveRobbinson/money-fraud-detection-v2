@@ -38,3 +38,12 @@ models:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: 'in (0, 1)'
+
+  - name: fct_age_of_user
+    columns:
+      - name: age_of_sender_account
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: '>= 0'
